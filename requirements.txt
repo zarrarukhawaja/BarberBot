@@ -1,0 +1,9 @@
+fastapi
+uvicorn
+sqlalchemy
+python-multipart
+google-genai
+python-dotenv
+dateparser
+pytest
+psycopg2-binary

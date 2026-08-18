@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>BarberBot Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <h1 class="sidebar-brand">
+        <svg class="brand-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M6 3v18"/><path d="M18 3v18"/><path d="M6 8h12"/><path d="M6 16h12"/>
+        </svg>
+        BarberBot
+      </h1>
+      <nav>
+        <button class="tab-btn active" data-tab="calendar">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          Calendar
+        </button>
+        <button class="tab-btn" data-tab="clients">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          Clients
+        </button>
+        <button class="tab-btn" data-tab="testchat">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+          </svg>
+          Conversations
+        </button>
+        <button class="tab-btn" data-tab="persona">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2a4 4 0 0 1 4 4v1a4 4 0 0 1-8 0V6a4 4 0 0 1 4-4z"/><path d="M6 21v-1a6 6 0 0 1 12 0v1"/><circle cx="12" cy="12" r="1"/>
+          </svg>
+          Your AI
+        </button>
+        <button class="tab-btn" data-tab="services-hours">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+          </svg>
+          Services &amp; Hours
+        </button>
+        <button class="tab-btn" data-tab="settings">
+          <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          Settings
+        </button>
+      </nav>
+    </aside>
+
+    <main class="content">
+
+      <section id="calendar" class="tab-panel active">
+        <div class="dashboard-layout">
+          <div class="dashboard-main">
+            <div class="dashboard-toolbar">
+              <h2 class="dashboard-title">Dashboard</h2>
+              <button id="refresh-bookings" class="btn-secondary">Refresh</button>
+            </div>
+
+            <div id="stat-cards" class="stat-cards">
+              <div class="stat-card">
+                <span class="stat-label">Today's bookings</span>
+                <span class="stat-value" id="stat-today">—</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">AI booked vs manual</span>
+                <span class="stat-value" id="stat-source">—</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Upcoming week</span>
+                <span class="stat-value" id="stat-week">—</span>
+              </div>
+            </div>
+
+            <div id="greeting-banner" class="greeting-banner">
+              <span class="greeting-text">Good morning, here's today</span>
+              <span class="greeting-count" id="greeting-count">Loading…</span>
+            </div>
+
+            <div class="schedule-section">
+              <h3 class="schedule-heading">Today's schedule</h3>
+              <div id="bookings-container" class="schedule-list">
+                <p class="hint">Loading bookings...</p>
+              </div>
+            </div>
+          </div>
+
+          <aside class="dashboard-rail">
+            <div class="rail-panel">
+              <h3 class="rail-panel-title">AI Activity</h3>
+              <ul class="rail-list">
+                <li class="rail-item">
+                  <span class="rail-item-text">New booking request from Marcus Lee — demo data, not wired to backend yet</span>
+                  <span class="rail-item-time">2 min ago</span>
+                </li>
+                <li class="rail-item">
+                  <span class="rail-item-text">Follow-up sent to Sarah Chen — demo data, not wired to backend yet</span>
+                  <span class="rail-item-time">18 min ago</span>
+                </li>
+                <li class="rail-item">
+                  <span class="rail-item-text">Reschedule confirmed for Alex Rivera — demo data, not wired to backend yet</span>
+                  <span class="rail-item-time">1 hr ago</span>
+                </li>
+              </ul>
+            </div>
+
+            <div class="rail-panel">
+              <h3 class="rail-panel-title">Notifications</h3>
+              <ul class="rail-list">
+                <li class="rail-item">
+                  <span class="rail-item-text">Reminder sent to James Wilson — demo data, not wired to backend yet</span>
+                  <span class="rail-item-time">Today, 9:00 AM</span>
+                </li>
+                <li class="rail-item">
+                  <span class="rail-item-text">No-show alert for booking #1042 — demo data, not wired to backend yet</span>
+                  <span class="rail-item-time">Yesterday</span>
+                </li>
+              </ul>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="persona" class="tab-panel">
+        <h2>Your AI</h2>
+        <p class="hint">This is what your AI knows about how to behave. Changes here affect how it talks to every customer.</p>
+        <label>Business name</label>
+        <input id="persona-business" type="text" />
+
+        <label>Tone</label>
+        <input id="persona-tone" type="text" placeholder="e.g. friendly and casual, or professional and brief" />
+
+        <label>System prompt (full instructions)</label>
+        <textarea id="persona-prompt" rows="8"></textarea>
+
+        <button id="save-persona">Save AI settings</button>
+        <span id="persona-status"></span>
+      </section>
+
+      <section id="testchat" class="tab-panel">
+        <div class="chat-shell">
+          <h2>Test Chat</h2>
+          <p class="hint">Try a quick conversation with the assistant backend and see how replies appear in the dashboard.</p>
+
+          <div id="chat-messages" class="chat-messages" aria-live="polite">
+            <div class="message ai">Hi! I'm BarberBot. How can I help today?</div>
+          </div>
+
+          <form id="chat-form" class="chat-form">
+            <input id="chat-input" type="text" placeholder="Type a message..." autocomplete="off" />
+            <button type="submit">Send</button>
+          </form>
+        </div>
+      </section>
+
+      <section id="clients" class="tab-panel">
+        <h2>Clients</h2>
+
+        <div class="settings-section">
+          <h3>Add Client</h3>
+          <div class="service-form">
+            <label>Name</label>
+            <input id="client-name" type="text" placeholder="e.g. Jordan" />
+            <label>Phone</label>
+            <input id="client-phone" type="text" placeholder="e.g. 555-1234" />
+            <label>Email</label>
+            <input id="client-email" type="text" placeholder="optional" />
+            <label>Notes</label>
+            <input id="client-notes" type="text" placeholder="e.g. prefers fades" />
+            <button id="add-client">Add Client</button>
+          </div>
+
+          <table id="clients-table">
+            <thead>
+              <tr><th>Name</th><th>Phone</th><th>Email</th><th>Notes</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="services-hours" class="tab-panel">
+        <h2>Services &amp; Hours</h2>
+
+        <div class="settings-section">
+          <h3>Business Hours</h3>
+          <label>Business hours</label>
+          <input id="business-hours" type="text" placeholder="Mon-Fri 9am-6pm, Sat 9am-3pm" />
+          <button id="save-hours">Save Business Hours</button>
+          <span id="hours-status"></span>
+        </div>
+
+        <div class="settings-section">
+          <h3>Services</h3>
+          <div class="service-form">
+            <label>Service name</label>
+            <input id="service-name" type="text" placeholder="e.g. Fade" />
+            <label>Price</label>
+            <input id="service-price" type="number" step="0.01" min="0" placeholder="0.00" />
+            <label>Duration (minutes)</label>
+            <input id="service-duration" type="number" min="1" placeholder="30" />
+            <button id="add-service">Add Service</button>
+          </div>
+
+          <table id="services-table">
+            <thead>
+              <tr><th>Name</th><th>Price</th><th>Duration</th><th></th></tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="settings" class="tab-panel">
+        <h2>Settings</h2>
+        <p class="hint">General account and integration settings will live here.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
